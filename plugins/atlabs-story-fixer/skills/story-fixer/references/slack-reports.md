@@ -1,7 +1,7 @@
 # Slack reports to Chinmaya
 
 Chinmaya owns this skill, keeps track of every story fix, and takes the fixes the skill can't handle.
-- Slack: **Chinmaya** (Atlabs workspace). Get the user id with `slack_search_users` (`keywords: ["Chinmaya"]`) at setup, or from `~/.atlabs-story-fixer/internal.md`, and save it in the manifest.
+- Slack: **Chinmaya** (Atlabs workspace). Get the user id with `slack_search_users` (`keywords: ["Chinmaya"]`) at setup, or from `atlabs-internal.md`, and save it in the manifest.
 - Send a **direct message** to that user id with `slack_send_message` (`channel_id` = the user id), from the member's own connected Slack. Don't post in public channels, because customer stories are confidential.
 
 There are two kinds of message, both sent **automatically once the member has said yes to automatic DMs** (asked once at setup, recorded as `slack_consent: yes` in the manifest). Tell them in one line each time you send one, and show them the text. Without that yes, write the message out in chat for them to send.

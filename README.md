@@ -1,6 +1,6 @@
 # Atlabs Claude Code plugins (internal)
 
-The Atlabs team's Claude Code plugin marketplace. The plugins are public, but they only work with Atlabs team access; no internal ids or customer data live here.
+The Atlabs team's Claude Code plugin marketplace. The plugins only work with Atlabs team access.
 
 | Plugin | What it does |
 |---|---|
@@ -8,7 +8,7 @@ The Atlabs team's Claude Code plugin marketplace. The plugins are public, but th
 
 ## Install (once per person)
 
-No GitHub account needed. In a terminal:
+No GitHub account needed. In a terminal (or type the same commands with a leading `/` inside Claude Code):
 
 ```bash
 claude plugin marketplace add Chinmaya123-cyber/atlabs-claude-plugins
@@ -17,6 +17,8 @@ claude plugin marketplace add Chinmaya123-cyber/atlabs-claude-plugins
 ```bash
 claude plugin install atlabs-story-fixer@atlabs-internal
 ```
+
+Then follow the 4 setup steps in [the plugin's README](plugins/atlabs-story-fixer/README.md).
 
 (Or inside Claude Code: `/plugin marketplace add Chinmaya123-cyber/atlabs-claude-plugins`, then `/plugin install atlabs-story-fixer@atlabs-internal`.)
 
@@ -33,7 +35,7 @@ Or turn on auto-update for `atlabs-internal` in `/plugin` → Marketplaces, so n
 1. Edit the files under `plugins/<name>/`.
 2. Bump `version` in `plugins/<name>/.claude-plugin/plugin.json` (the only place the version lives; teammates only get changes after a bump).
 3. Run `claude plugin validate .`, then commit and push to `main`.
-4. **This repo is public.** Never commit internal ids, customer data or keys; keep them in the private `~/.atlabs-story-fixer/internal.md`.
+4. Never commit API keys or customer data.
 
 ## Adding a plugin
 

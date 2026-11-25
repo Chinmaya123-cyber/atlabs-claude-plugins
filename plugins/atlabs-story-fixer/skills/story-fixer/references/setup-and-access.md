@@ -1,20 +1,18 @@
 # Setup and access check (Step 0)
 
-Run this check before anything else. If a session shows two Atlabs servers (e.g. a claude.ai connector and a `claude mcp add` one), use one consistently, the one whose `get_account` email is the member's.
+Run this check before anything else. Do as much of it yourself as you can (run the install commands for the member after a quick OK), so they have as few steps as possible.
 
- Atlabs MCP and Slack are required. Langfuse is strongly recommended. Don't start diagnosing until they work, or the person has agreed to go on without one.
+Team ids, Langfuse names and the billing query are in `atlabs-internal.md` in this folder; read it now.
+
+If a session shows two Atlabs servers (e.g. the plugin's own `atlabs` server and an older `claude mcp add` one), use one consistently: the one whose `get_account` email is the member's.
+
+Atlabs MCP and Slack are required. Langfuse is strongly recommended. Don't start diagnosing until they work, or the person has agreed to go on without one.
 
 ## 1. Atlabs MCP (required)
 
 Test: call `get_account`. It should return the account's email and credit balance.
 
-If the Atlabs tools are missing, give the person this command and ask them to restart Claude Code:
-
-```bash
-claude mcp add -s user --transport http atlabs https://mcp.atlabs.ai/mcp
-```
-
-Then they run `/mcp`, pick **atlabs** and sign in with their own Atlabs account. In the Claude desktop app or on claude.ai, they add it as a custom connector with the same URL.
+This plugin ships the Atlabs MCP server, so there's nothing to install. If `get_account` fails or the Atlabs tools aren't there, the member only needs to sign in once: type `/mcp`, pick the **atlabs** server (listed under this plugin), choose **Authenticate**, and sign in with their own Atlabs account. If there's still no Atlabs server, they restart Claude Code once after installing the plugin.
 
 **Story access: clone first (required).** The Atlabs MCP can only open stories in the account it's signed in to. Every team member must **clone the customer's story into their own Atlabs account** before the skill can read it, even when the story is shared with them.
 
@@ -50,7 +48,7 @@ claude mcp add -s user --transport http langfuse https://cloud.langfuse.com/api/
 
 Every job ends with a summary DM to Chinmaya, and stuck issues are escalated there. The member's **own** Slack account must be connected so the messages come from them.
 
-Test: `slack_search_users` with `keywords: ["Chinmaya"]` and `natural_language_query: "Chinmaya at Atlabs"`. It should return Chinmaya in the Atlabs workspace. Use that user id as the DM `channel_id` (`internal.md` also lists it).
+Test: `slack_search_users` with `keywords: ["Chinmaya"]` and `natural_language_query: "Chinmaya at Atlabs"`. It should return Chinmaya in the Atlabs workspace. Use that user id as the DM `channel_id` (`atlabs-internal.md` also lists it).
 
 If there are no Slack tools, or the search fails, **stop and ask the member to connect Slack** before going further:
 
@@ -63,15 +61,11 @@ If there are no Slack tools, or the search fails, **stop and ask the member to c
 
 Then re-test. If they say they can't connect today, carry on, but write every Slack message (summary and escalations) out in full in chat so they can paste it to Chinmaya. Mark it "Slack not connected, sent manually" in the report.
 
-## 4. Internal notes file (recommended)
-
-Check for `~/.atlabs-story-fixer/internal.md`. It holds the team's internal ids and names (Langfuse project and prompt names, the billing-log query, confirmed defaults), which are kept out of the public plugin. If it's missing, tell the member: "Ask Chinmaya on Slack for the story-fixer internal notes and save them as `~/.atlabs-story-fixer/internal.md`." The skill works without it; it just discovers more from Langfuse and can't run billing checks.
-
-## 5. Local tools for QC (recommended)
+## 4. Local tools for QC (recommended)
 
 QC uses `ffmpeg`/`ffprobe` for frame grabs and audio checks, and **faster-whisper** in its own virtual environment for transcripts, language detection and word timestamps. (A plain `pip3 install` fails on recent Homebrew Python, which is "externally managed", so always use the venv.)
 
-Check: `which ffmpeg ffprobe` and `~/.story-fixer-venv/bin/python -c "import faster_whisper, numpy"`. If either fails, run:
+Check: `which ffmpeg ffprobe` and `~/.story-fixer-venv/bin/python -c "import faster_whisper, numpy"`. If either fails, **offer to run the install yourself** ("I need to install ffmpeg and a speech checker for QC, about 2 minutes. OK?"), and on yes run:
 
 ```bash
 brew install ffmpeg
@@ -81,4 +75,4 @@ brew install ffmpeg
 python3 -m venv ~/.story-fixer-venv && ~/.story-fixer-venv/bin/pip install -U faster-whisper numpy
 ```
 
-The first transcription downloads the whisper model (small ≈ 0.5 GB, large-v3 ≈ 3 GB). Without these tools, QC falls back to `show_media` and visual review only; say so in the QC report.
+If Homebrew itself is missing, ask the member to install it from https://brew.sh first. The first transcription downloads the whisper model (small ≈ 0.5 GB, large-v3 ≈ 3 GB). Without these tools, QC falls back to `show_media` and visual review only; say so in the QC report.

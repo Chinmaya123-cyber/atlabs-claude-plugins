@@ -2,7 +2,7 @@
 
 A Langfuse session groups every LLM call the Atlabs pipeline made for one story: planning, screenplay, image prompts, motion prompts and lip-sync prompts. The customer's in-app "direct this shot" rounds land there too when they go through an LLM.
 
-If `~/.atlabs-story-fixer/internal.md` exists, read it first. It holds the team's internal names (project, prompt templates, observation names) and saves you discovery time. If it doesn't exist, discover everything from the session itself as below.
+Read `atlabs-internal.md` (in this folder) first: it lists the project, the prompt-template names and the observation names, which saves discovery time. Prompt names change over time, so confirm them against the session.
 
 ## Get the session id
 
@@ -51,7 +51,7 @@ Write a short **Story context** block before diagnosing:
 - the customer's attempts: how many "direct this shot" rounds per scene, what they asked for, any model switches. Repeated rounds on one scene usually mean the fault is in the keyframe;
 - any pipeline errors or warnings.
 
-If the session doesn't include the customer's later edits, say so. Only the first generation is often logged, and **a clone keeps only the current clip and its keyframe**, not the customer's earlier attempts. Use the customer's own message, plus the billing log if the member has access (see `internal.md`).
+If the session doesn't include the customer's later edits, say so. Only the first generation is often logged, and **a clone keeps only the current clip and its keyframe**, not the customer's earlier attempts. Use the customer's own message, plus the billing log if the member has access (see `atlabs-internal.md`).
 
 If the member's Langfuse keys get `Access denied … traces:read`, fall back to the prompts stored on each shot (`get_story_assets` → `prompt`). Ask Chinmaya for keys that have read access.
 

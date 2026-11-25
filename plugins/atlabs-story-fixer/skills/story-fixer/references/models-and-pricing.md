@@ -5,7 +5,7 @@
 **Recommend only the models the story's own workflow used.** A fix should look like the rest of the story and behave the way the pipeline does. A different model changes the look, the motion feel, the voice handling and the prompt format, and that creates new problems (style mismatch between neighbouring shots, re-voiced audio, refused prompts, wrong resolution, a different price).
 
 The Atlabs MCP doesn't say which model made a clip (`get_story_assets` / `get_scene_assets` have no model field), so piece it together, in this order of trust:
-1. **Billing log**, if the member has access (the query is in `~/.atlabs-story-fixer/internal.md`): the pipeline's own generation rows name the exact model. This is the most exact source.
+1. **Billing log**, if the member has access (the query is in `atlabs-internal.md`): the pipeline's own generation rows name the exact model. This is the most exact source.
 2. **Langfuse session:** the prompt templates that ran and their `getPrompt(...).config`, which names the model family (e.g. MiniMax H3 for lip sync). Some flows also have a model-selection stage with the model per scene; many don't.
 3. **The clips themselves:** `ffprobe` resolution, where 1344×768 or 1424×800 means H3-family 768p. The prompt stored on each shot also tells you: six-section `subject_definitions…` means H3 reference-to-video, and `integrated_multimodal_description` means H3 image-to-video.
 4. **The image edit default:** `scene_edit_image` keeps the story's own image model when `model` is left out, so leave it out.
@@ -17,7 +17,7 @@ Confirmed defaults so far (Nov 2026):
 | Screenplay stories with speaking characters | `h3_highspeed_reference_to_video`, 768p, with the still, the portraits and the scene VO as references | MiniMax H3 family from the start frame; confirm the exact model from the billing log or the clip resolution |
 | Music-video and kids-song stories | H3 family; confirm | H3 family; confirm |
 
-`internal.md` may list more confirmed defaults. If the sources disagree or say nothing, **don't guess**. Say which candidates fit, recommend the H3-family one that matches the clip resolution and prompt format, and ask Chinmaya on Slack (template B, need: "default models for story <id>") if the member wants certainty before spending.
+`atlabs-internal.md` may list more confirmed defaults. If the sources disagree or say nothing, **don't guess**. Say which candidates fit, recommend the H3-family one that matches the clip resolution and prompt format, and ask Chinmaya on Slack (template B, need: "default models for story <id>") if the member wants certainty before spending.
 
 Write the defaults into the fix plan as **"Workflow default"**, with the price per unit, so the member sees what you recommend and why.
 
@@ -75,4 +75,4 @@ Gotchas:
 
 ## Billing check (optional, internal access only)
 
-For credit complaints, and to confirm which models the pipeline and the customer actually ran, members with billing-log access use the read-only query in `~/.atlabs-story-fixer/internal.md`. Never change billing data, and never promise refunds. Compensation goes to Chinmaya.
+For credit complaints, and to confirm which models the pipeline and the customer actually ran, members with billing-log access use the read-only query in `atlabs-internal.md`. Never change billing data, and never promise refunds. Compensation goes to Chinmaya.

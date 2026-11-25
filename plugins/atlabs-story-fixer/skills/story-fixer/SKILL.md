@@ -38,7 +38,7 @@ Ask for whatever is missing, all in one message:
 
 ## 2. Check access
 
-Follow `references/setup-and-access.md`: Atlabs MCP (`get_account`, `get_story`), Langfuse MCP (session readable), **Slack (required)**, the private internal notes file, ffmpeg and whisper. Report the check in one short block.
+Follow `references/setup-and-access.md`: Atlabs MCP (`get_account`, `get_story`), Langfuse MCP (session readable), **Slack (required)**, ffmpeg and whisper (run their installs yourself after a quick OK). Report the check in one short block.
 
 **Slack must be connected before you start, and you need the member's OK for automatic DMs.** Once Slack works, ask once: "I'll DM Chinmaya automatically from your Slack: an escalation whenever an issue is stuck, and a short summary at the end of the job. OK?" On yes, record `slack_consent: yes` in the manifest and send those messages without asking again (always show the member what was sent). If they decline, write each message out in chat for them to send. Every job ends with a summary DM to Chinmaya, and stuck issues are escalated there. If the Slack tools are missing or can't find Chinmaya, stop and ask the member to connect their own Slack account (steps in `references/setup-and-access.md` §3), then re-check. Go on without Slack only if they say they can't connect it today; then write each Slack message out in full in chat for them to paste to Chinmaya, and say so in the report.
 
@@ -127,5 +127,5 @@ On fail, change the one thing QC points at (keyframe, beat, speaker wording, pad
 - `references/models-and-pricing.md`: the default-model rule, override warning, price table, quoting, billing query
 - `references/qc.md`: job folder, per-generation QC checklist, retry rule, final report
 - `references/slack-reports.md`: Slack DMs to Chinmaya: escalations, access requests and the end-of-job summary (templates)
-- `~/.atlabs-story-fixer/internal.md` (private, from Chinmaya, not in this plugin): internal ids, prompt names, billing query
+- `references/atlabs-internal.md`: team ids, Langfuse project and prompt names, billing-log query, confirmed defaults
 - `scripts/qc_clip.py`: frame sheet, first-second flash sheet, transcript, detected language, text match, word offset and speech-span ratio vs VO (run with `~/.story-fixer-venv/bin/python`)
