@@ -1,0 +1,16 @@
+{
+  "name": "atlabs-story-fixer",
+  "version": "1.4.0",
+  "description": "Fix customer Atlabs user stories end to end: read the story and its Langfuse session, diagnose each reported issue, quote credits on the workflow's default models, fix on approval, QC every generation, and escalate anything unresolved to Chinmaya on Slack.",
+  "author": {
+    "name": "Atlabs"
+  },
+  "keywords": [
+    "atlabs",
+    "story",
+    "lip-sync",
+    "minimax-h3",
+    "qc",
+    "langfuse"
+  ]
+}

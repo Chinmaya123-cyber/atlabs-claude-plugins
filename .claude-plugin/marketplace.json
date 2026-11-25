@@ -1,0 +1,16 @@
+{
+  "name": "atlabs-internal",
+  "owner": {
+    "name": "Atlabs"
+  },
+  "metadata": {
+    "description": "Internal Atlabs Claude Code plugins"
+  },
+  "plugins": [
+    {
+      "name": "atlabs-story-fixer",
+      "source": "./plugins/atlabs-story-fixer",
+      "description": "Diagnose, fix and QC customer Atlabs user stories with the Atlabs MCP, Langfuse context and Slack escalation."
+    }
+  ]
+}
